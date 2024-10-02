@@ -17,10 +17,10 @@ public class SequentialActionCommand extends CommandBase {
     Action action;
     DriveSubsystem driveSubsystem;
 
-    public SequentialActionCommand(TrajectoryActionBuilder tab){
+    public SequentialActionCommand(Action action){
 
-        this.tab = tab;
-        action = tab.build();
+        this.action = action;
+
 
         addRequirements(driveSubsystem);
     }

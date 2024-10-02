@@ -252,8 +252,7 @@ public class AutonomousGamePad extends CommandOpMode {
 
 
         if(update){
-            showTSEPosition();
-            telemetry.update();
+
         }
     }
 
@@ -263,7 +262,7 @@ public class AutonomousGamePad extends CommandOpMode {
                 Side.getInstance().getPositionSide().toString(),
                 Path.getInstance().getSelectedPathToFollow(),selectedStartPos));
 
-        showTSEPosition();
+
         telemetry.update();
 
     }

@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.opmodes.autonomous.paths;
 
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.acmerobotics.roadrunner.ftc.Actions;
 import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.InstantCommand;
 import com.arcrobotics.ftclib.command.WaitUntilCommand;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -36,21 +39,40 @@ public class TestPath1 {
     }
 
     public void createPath(){
-
+        telemetry.addLine("In create path");
+        telemetry.update();
 
 
     }
 
     public void execute(CommandOpMode commandOpMode){
+
+        telemetry.addLine("execute....");
+
+
         TrajectoryActionBuilder tab1 = drive.actionBuilder(startPose)
-                .lineToYSplineHeading(33, Math.toRadians(0))
-                .waitSeconds(2)
-                .setTangent(Math.toRadians(90))
-                .lineToY(48);
-        SequentialActionCommand seqCommand1 = new SequentialActionCommand(tab1);
+                .lineToX(5);
+        Action action1  = tab1.build();
+        SequentialActionCommand seqCommand1 = new SequentialActionCommand(action1);
+
+        telemetry.addLine("run blocking....");
+            Actions.runBlocking(
+                    new SequentialAction(
+                            action1
+                    )
+            );
+
+        telemetry.update();
+
 
         commandOpMode.schedule(new WaitUntilCommand(commandOpMode::isStarted).andThen(
-                seqCommand1
+                new InstantCommand(()->{
+                    Actions.runBlocking(
+                            new SequentialAction(
+                                    action1
+                            )
+                    );
+                })
         ));
     }
 }

@@ -55,8 +55,8 @@ public class CreateDriveTrainMechanism extends CreateMechanismBase {
     // All FOREWARD = moving foreward and backward but left and right is reversed
         fl.motor.setDirection(DcMotorSimple.Direction.REVERSE);
         bl.motor.setDirection((DcMotorSimple.Direction.REVERSE));
-        fr.motor.setDirection(DcMotorSimple.Direction.FORWARD);
-        br.motor.setDirection((DcMotorSimple.Direction.FORWARD));
+        fr.motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        br.motor.setDirection((DcMotorSimple.Direction.REVERSE));
 
 
 
